@@ -25,11 +25,15 @@ public class PiyoGenerator : MonoBehaviour
     /// </summary>
     /// <param name="count"></param>
     /// <returns></returns>
-    IEnumerator DropBall(int count)
+    public IEnumerator DropBall(int count)
     {
         // 要求された個数だけ生成する
         for (int i = 0; i < count; i++)
         {
+            /// ボールプレハブを１つ（なんでもいい、今回の例ではPiyo_blue）を用意して、
+            /// インスタンシエイト後にスプライトを差し替える形で
+            /// 各ぴよのボールプレハブを用意
+            
             // 位置決定
             Vector2 pos = new Vector2(Random.Range(-2.0f, 2.0f), 7f);
 
@@ -37,7 +41,10 @@ public class PiyoGenerator : MonoBehaviour
             GameObject ball
                 = Instantiate(ballPrefab
                             , pos
-                            , Quaternion.AngleAxis(Random.Range(-40, 40), Vector3.forward));
+                            , Quaternion.AngleAxis(Random.Range(-40, 40), Vector3.forward));    // ←（☆）
+
+            ///（☆）Vector3.forward方向（つまりZ軸、画面向かって奥方向）を軸に-40～40度の間で
+            ///ランダムな値で回転させたものをインスタンシエイトするような命令
 
             // ボール種類選定
             int spriteId = Random.Range(0, 5);
